@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchingData, fetchingFailed, fetchingSuccess } from "../../actions";
-import moment from "moment";
 
 const url = "https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql";
 const query = `{
@@ -54,6 +53,14 @@ const Stops = (props) => {
     return <span>{error}</span>;
   };
 
+  function secondsToHms(d) {
+    d = Number(d);
+    const h = Math.floor(d / 3600);
+    const m = Math.floor(d % 3600 / 60);
+
+    return h + ":" + m ; 
+}
+
   const getDataSuccess = () => {
     console.log("success success");
     if (data && data.stoptimesWithoutPatterns) {
@@ -61,6 +68,7 @@ const Stops = (props) => {
         <div>
           <table className="timetableTable">
             <thead>
+			  <th>Number</th>
               <th>From</th>
               <th>To </th>
               <th>Arrival Time</th>
@@ -70,12 +78,11 @@ const Stops = (props) => {
             {data.stoptimesWithoutPatterns.map((stopInfo, index) => (
               <tbody key={index}>
                 <tr>
+					<td>{stopInfo.trip.route.shortName}</td>
                   <td>{data.name}</td>
-
                   <td>{stopInfo.headsign}</td>
                   <td>
-                    {" "}
-                    {moment(stopInfo.scheduledArrival).format("h:mm:ss a")}
+                    {secondsToHms(stopInfo.scheduledArrival)}
                   </td>
                   <td>
                     {stopInfo.trip.bikesAllowed === "NOT_ALLOWED"
