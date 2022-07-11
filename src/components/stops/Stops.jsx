@@ -49,26 +49,24 @@ const Stops = (props) => {
   }, [fetchData, fetchFailed, fetchSuccess]); // See the hints? :)
 
   const getDataFailed = () => {
-    console.log("error error");
     return <span>{error}</span>;
   };
 
   function secondsToHms(d) {
     d = Number(d);
     const h = Math.floor(d / 3600);
-    const m = Math.floor(d % 3600 / 60);
+    const m = Math.floor((d % 3600) / 60);
 
-    return h + ":" + m ; 
-}
+    return h + ":" + m;
+  }
 
   const getDataSuccess = () => {
-    console.log("success success");
     if (data && data.stoptimesWithoutPatterns) {
       return (
         <div>
           <table className="timetableTable">
             <thead>
-			  <th>Number</th>
+              <th>Number</th>
               <th>From</th>
               <th>To </th>
               <th>Arrival Time</th>
@@ -78,12 +76,10 @@ const Stops = (props) => {
             {data.stoptimesWithoutPatterns.map((stopInfo, index) => (
               <tbody key={index}>
                 <tr>
-					<td>{stopInfo.trip.route.shortName}</td>
+                  <td>{stopInfo.trip.route.shortName}</td>
                   <td>{data.name}</td>
                   <td>{stopInfo.headsign}</td>
-                  <td>
-                    {secondsToHms(stopInfo.scheduledArrival)}
-                  </td>
+                  <td>{secondsToHms(stopInfo.scheduledArrival)}</td>
                   <td>
                     {stopInfo.trip.bikesAllowed === "NOT_ALLOWED"
                       ? "No"
@@ -105,17 +101,13 @@ const Stops = (props) => {
   };
 
   const loadData = () => {
-    console.log("fetching data");
     if (loading) {
-      console.log(loading);
       return <span>Loading ...</span>;
     }
     if (error) {
-      console.log(error);
       return getDataFailed();
     }
     if (data) {
-      console.log(data);
       return getDataSuccess();
     }
   };
@@ -152,15 +144,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchData: () => {
-      console.log("mapDispatchToProps, fetchData");
       dispatch(fetchingData());
     },
     fetchFailed: (error) => {
-      console.log("mapDispatchToProps, fetchFailed");
       dispatch(fetchingFailed(error));
     },
     fetchSuccess: (data) => {
-      console.log("mapDispatchToProps, fetchSuccess");
       dispatch(fetchingSuccess(data));
     },
   };
