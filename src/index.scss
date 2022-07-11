@@ -5,20 +5,25 @@ $color: #dddddd;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  justify-content: center;
+  text-align: center;
 }
 
 .timetableTable {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid $color;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: $color;
+  max-width: 70%;
+  display: inline-block;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid $color;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: $color;
 }

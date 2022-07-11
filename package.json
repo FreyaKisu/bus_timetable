@@ -17,7 +17,7 @@
     "sass": "^1.53.0",
     "web-vitals": "^2.1.4"
   },
-  "author": "Vinicius Cerqueira Bonifacio <vinicius@choicely.com>",
+  "author": "Vinicius Cerqueira Bonifacio <vinicius@choicely.com> & Edit Orosz",
   "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
@@ -42,9 +42,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "jest-watch-typeahead": "^0.6.5",
-    "redux-mock-store": "^1.5.4"
   }
 }
